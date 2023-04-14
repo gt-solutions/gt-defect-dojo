@@ -1,4 +1,4 @@
-THIS API WRAPPER IS DEVELOPE BY ME
+THIS API WRAPPER IS DEVELOPE BY MEp
 ========
 
 See `clients and api wrappers in the docs <https://defectdojo.github.io/django-DefectDojo/integrations/api-v2-docs/#clients--api-wrappers>`_ for alternatives
