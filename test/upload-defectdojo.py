@@ -5,7 +5,7 @@ as part of the OWASP DefectDojo and OWASP AppSec Pipeline Security projects
 
 Description: CI/CD example for DefectDojo
 """
-from .defectdojo_apiv2 import DefectDojoAPIv2 as defectdojo
+import defectdojo_apiv2 as defectdojo
 from datetime import datetime, timedelta
 import os, sys
 import argparse
@@ -84,15 +84,10 @@ def get_engagement_id(dd, product_id, user_id, engagement_id, engagement_name, b
         engagement = dd.get_engagement(engagement_id = engagement_id)
         return engagement_id
     elif engagement_name != None:
-        engagement_name_plus_branch = engagement_name
-        if branch_name is not None:
-            # engagement_name_plus_branch = engagement_name + " (" + branch_name + ")"
-            # filtering on name was added at some point
-            engagements_reponse = dd.list_engagements(product_id=product_id, status="In Progress", name=engagement_name)
-            for engagement in engagements_reponse.data["results"]:
-                # print(engagement["name"])
-                if engagement["name"] == engagement_name:
-                    return engagement["id"]
+        engagements_reponse = dd.list_engagements(product_id=product_id, status="In Progress", name=engagement_name)
+        for engagement in engagements_reponse.data["results"]:
+            if engagement["name"] == engagement_name:
+                return engagement["id"]
     else:
         raise ValueError('engagement id or name required')
 
