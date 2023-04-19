@@ -5,7 +5,7 @@ as part of the OWASP DefectDojo and OWASP AppSec Pipeline Security projects
 
 Description: CI/CD example for DefectDojo
 """
-import defectdojo_apiv2 as defectdojo
+from gt_defect_dojo import defectdojo_apiv2 as defectdojo
 from datetime import datetime, timedelta
 import os, sys
 import argparse
@@ -102,7 +102,7 @@ def get_engagement_id(dd, product_id, user_id, engagement_id, engagement_name, b
     if build_url:
         engagement_description += " for " + build_url
 
-    engagement_id = dd.create_engagement(engagement_name_plus_branch, product_id, str(user_id),
+    engagement_id = dd.create_engagement(engagement_name, product_id, str(user_id),
     "In Progress", start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d"), branch_tag=branch_name, description=engagement_description, build_id=build_id, commit_hash=commit_hash)
     return str(engagement_id.data["id"])
 
@@ -376,7 +376,7 @@ class Main:
             engagement_id = get_engagement_id(dd, product_id, user_id, engagement_id, engagement_name, branch_name, build_id=build_id, build_url=build_url, commit_hash=commit_hash)
             if debug:
                 print('engagement_id derived from paramaters: ', str(engagement_id))
-
+            
             test_ids = None
             if file is not None:
                 if scanner is not None:
